@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Path – Digital Skills & CBT Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a1f5c;
+    --blue: #1a4ab5;
+    --blue-mid: #2563eb;
+    --teal: #00c9b1;
+    --green: #2e7d32;
+    --green-btn: #3a8f3e;
+    --green-light: #4caf50;
+    --white: #ffffff;
+    --gray-100: #f4f6fb;
+    --glass-bg: rgba(255,255,255,0.12);
+    --glass-border: rgba(255,255,255,0.25);
+    --glass-shadow: 0 8px 32px rgba(10,31,92,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a2e; overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 48px;
+    background: rgba(10,31,92,0.82);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .logo { display: flex; align-items: center; gap: 0; text-decoration: none; }
+  .logo-img { height: 64px; width: auto; object-fit: contain; display: block; }
+  .nav-links { display:flex; align-items:center; gap:32px; }
+  .nav-links a { color:rgba(255,255,255,.85); text-decoration:none; font-size:14px; font-weight:500; transition:.2s; }
+  .nav-links a:hover { color:#fff; }
+  .nav-links .about-arrow::after { content:" ▾"; font-size:10px; }
+  .btn-book {
+    background: var(--green-btn); color:#fff; padding:10px 22px; border-radius:8px;
+    font-size:14px; font-weight:600; text-decoration:none; transition:.2s;
+    box-shadow: 0 4px 14px rgba(46,125,50,.4);
+  }
+  .btn-book:hover { background:#2e7d32; transform:translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    background: linear-gradient(135deg, #0a1f5c 0%, #1a4ab5 45%, #0d6e8a 80%, #00c9b1 100%);
+    padding-top: 80px;
+  }
+  /* Animated particle dots */
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,.18) 1px, transparent 1px),
+      radial-gradient(circle, rgba(0,201,177,.15) 1.5px, transparent 1.5px);
+    background-size: 48px 48px, 80px 80px;
+    background-position: 0 0, 24px 24px;
+    animation: particleDrift 20s linear infinite;
+  }
+  @keyframes particleDrift { to { background-position: 48px 48px, 72px 72px; } }
+
+  /* wave sweep */
+  .hero::after {
+    content:''; position:absolute; bottom:-2px; left:0; right:0; height:120px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23f4f6fb' d='M0,80 C360,0 1080,160 1440,40 L1440,120 L0,120Z'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
+
+  .hero-inner {
+    position:relative; z-index:2; width:100%; max-width:1200px; margin:0 auto;
+    padding: 60px 48px; display:flex; align-items:center; gap:40px;
+  }
+  .hero-text { flex:1; }
+  .hero-text h1 {
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:clamp(38px,5vw,60px); font-weight:800; color:#fff; line-height:1.12;
+    margin-bottom:18px; text-shadow: 0 2px 20px rgba(0,0,0,.3);
+    animation: fadeUp .7s ease both;
+  }
+  .hero-text p {
+    color:rgba(255,255,255,.85); font-size:17px; line-height:1.6;
+    margin-bottom:32px; max-width:480px;
+    animation: fadeUp .7s .15s ease both;
+  }
+  .btn-started {
+    display:inline-block; background:var(--green-btn); color:#fff;
+    padding:14px 32px; border-radius:10px; font-weight:700; font-size:15px;
+    text-decoration:none; box-shadow:0 6px 20px rgba(46,125,50,.45);
+    transition:.25s; animation: fadeUp .7s .3s ease both;
+  }
+  .btn-started:hover { background:#2e7d32; transform:translateY(-2px); box-shadow:0 10px 28px rgba(46,125,50,.5); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+
+  /* hero image glass card */
+  .hero-image {
+    flex:1; position:relative; display:flex; justify-content:flex-end;
+    animation: fadeUp .8s .2s ease both;
+  }
+  /* ── SLIDESHOW ── */
+  .hero-slideshow {
+    position:relative;
+    width:clamp(300px,42vw,520px);
+    aspect-ratio:4/3;
+    border-radius:24px; overflow:hidden;
+    border:1.5px solid var(--glass-border);
+    box-shadow:0 24px 64px rgba(0,0,0,.4), inset 0 0 0 1px rgba(255,255,255,.15);
+    flex-shrink:0;
+  }
+  .slide {
+    position:absolute; inset:0;
+    opacity:0; transition:opacity .9s ease;
+    pointer-events:none;
+  }
+  .slide.active { opacity:1; pointer-events:auto; }
+  .slide img {
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  /* shirt slide special */
+  .slide-shirt { position:relative; background:#0a2a6e; }
+  .slide-shirt img.shirt-photo { width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.55) saturate(1.4) hue-rotate(185deg); }
+  .shirt-tint {
+    position:absolute; inset:0;
+    background: linear-gradient(135deg, rgba(10,31,92,.55), rgba(26,74,181,.4));
+    pointer-events:none;
+  }
+  .shirt-logo-box {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-60%);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    z-index:3;
+  }
+  .shirt-logo-overlay {
+    width:clamp(100px,22%,160px);
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,.7)) brightness(1.1);
+    animation: logoPulse 3s ease-in-out infinite;
+  }
+  @keyframes logoPulse {
+    0%,100% { transform:scale(1); filter:drop-shadow(0 4px 20px rgba(0,0,0,.7)) brightness(1.1); }
+    50% { transform:scale(1.04); filter:drop-shadow(0 6px 28px rgba(37,99,235,.6)) brightness(1.2); }
+  }
+  .shirt-name {
+    color:#fff; font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+    background:rgba(255,255,255,.12); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.25); border-radius:50px;
+    padding:5px 16px;
+  }
+  /* shimmer on all slides */
+  .slide::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg,rgba(255,255,255,.1) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  /* slide caption */
+  .slide-caption {
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(transparent, rgba(10,31,92,.75));
+    padding:28px 20px 16px; color:#fff; z-index:2;
+  }
+  .slide-caption .cap-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:700; margin-bottom:2px; }
+  .slide-caption .cap-sub { font-size:12px; opacity:.8; }
+  /* nav arrows */
+  .slide-arrow {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,.2); backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.3);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; z-index:10; transition:.2s; color:#fff;
+  }
+  .slide-arrow:hover { background:rgba(255,255,255,.35); }
+  .slide-arrow.prev { left:12px; }
+  .slide-arrow.next { right:12px; }
+  .slide-arrow svg { width:16px; height:16px; }
+  /* dots */
+  .hero-dots {
+    position:absolute; bottom:12px; left:50%; transform:translateX(-50%);
+    display:flex; gap:7px; z-index:10;
+  }
+  .hero-dot {
+    width:8px; height:8px; border-radius:50%;
+    background:rgba(255,255,255,.4); cursor:pointer; transition:.3s;
+    border:1px solid rgba(255,255,255,.3);
+  }
+  .hero-dot.active { background:#fff; width:22px; border-radius:4px; }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--gray-100); padding: 90px 48px;
+    position:relative;
+  }
+  .services::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(37,99,235,.06), transparent),
+                radial-gradient(ellipse 50% 50% at 20% 50%, rgba(0,201,177,.05), transparent);
+    pointer-events:none;
+  }
+  .section-header { text-align:center; margin-bottom:56px; position:relative; z-index:1; }
+  .section-header h2 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:36px; font-weight:800;
+    color: var(--navy); margin-bottom:12px;
+  }
+  .section-header p { color:#6b7280; font-size:15.5px; }
+
+  .services-grid {
+    max-width:1200px; margin:0 auto; position:relative; z-index:1;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+  }
+  .service-card {
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 20px;
+    padding: 36px 28px 28px;
+    box-shadow: 0 4px 24px rgba(10,31,92,.08), 0 1px 0 rgba(255,255,255,.8) inset;
+    transition: .3s; cursor:pointer;
+  }
+  .service-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(10,31,92,.14); }
+  .service-icon {
+    width:64px; height:64px; border-radius:16px; margin-bottom:20px;
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(135deg, rgba(37,99,235,.1), rgba(0,201,177,.1));
+  }
+  .service-icon svg { width:34px; height:34px; }
+  .service-card h3 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:17px; font-weight:700;
+    color:var(--navy); margin-bottom:10px; text-align:center;
+  }
+  .service-card p { font-size:13.5px; color:#6b7280; line-height:1.65; text-align:center; margin-bottom:18px; }
+  .learn-more {
+    display:inline-flex; align-items:center; gap:4px;
+    color:var(--blue-mid); font-size:13.5px; font-weight:600;
+    text-decoration:none; transition:.2s;
+  }
+  .learn-more:hover { gap:8px; }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    position:relative; overflow:hidden;
+    background: linear-gradient(135deg, #0a1f5c 0%, #1a4ab5 50%, #0d6e8a 100%);
+    padding: 90px 48px;
+    min-height:600px;
+    display:flex; align-items:center;
+  }
+  .cta-section::before {
+    content:''; position:absolute; inset:0;
+    background-image: radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: particleDrift 25s linear infinite;
+  }
+  /* wave top */
+  .cta-wave-top {
+    position:absolute; top:-2px; left:0; right:0; height:100px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f4f6fb' d='M0,60 C360,120 1080,0 1440,80 L1440,0 L0,0Z'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
+  /* wave bottom */
+  .cta-wave-bot {
+    position:absolute; bottom:-2px; left:0; right:0; height:100px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23e8f5e9' d='M0,40 C360,0 1080,100 1440,20 L1440,100 L0,100Z'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
+
+  .cta-inner {
+    position:relative; z-index:2; width:100%; max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+  }
+  .cta-left h2 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(32px,3.5vw,46px);
+    font-weight:800; color:#fff; line-height:1.15; margin-bottom:16px;
+  }
+  .cta-left p { color:rgba(255,255,255,.8); font-size:15.5px; line-height:1.7; margin-bottom:28px; }
+
+  .checklist { list-style:none; margin-bottom:36px; display:flex; flex-direction:column; gap:12px; }
+  .checklist li { display:flex; align-items:center; gap:12px; color:#fff; font-size:15px; font-weight:500; }
+  .check-icon {
+    width:26px; height:26px; border-radius:50%; background:var(--green-btn);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    box-shadow:0 3px 10px rgba(46,125,50,.5);
+  }
+  .check-icon svg { width:14px; height:14px; }
+  .btn-courses {
+    display:inline-block; background:var(--green-btn); color:#fff;
+    padding:14px 30px; border-radius:10px; font-weight:700; font-size:15px;
+    text-decoration:none; box-shadow:0 6px 20px rgba(46,125,50,.45); transition:.25s;
+  }
+  .btn-courses:hover { background:#2e7d32; transform:translateY(-2px); }
+
+  /* person image */
+  .cta-person {
+    position:absolute; bottom:0; left:42%;
+    width:clamp(200px,20vw,280px);
+    filter:drop-shadow(0 -8px 30px rgba(0,201,177,.25));
+    z-index:3;
+    transform:translateX(-50%);
+  }
+
+  /* glass booking card */
+  .booking-card {
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 24px;
+    padding: 36px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.8) inset;
+    position:relative; z-index:4;
+  }
+  .booking-card h3 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800;
+    color:var(--navy); margin-bottom:4px;
+  }
+  .booking-card p { color:#6b7280; font-size:14px; margin-bottom:24px; }
+  .form-field {
+    display:flex; align-items:center;
+    border: 1.5px solid #e5e7eb; border-radius:10px;
+    padding:12px 16px; gap:10px; margin-bottom:14px; background:#fafafa;
+    transition:.2s;
+  }
+  .form-field:focus-within { border-color:var(--blue-mid); background:#fff; box-shadow:0 0 0 3px rgba(37,99,235,.08); }
+  .form-field input, .form-field select {
+    border:none; background:transparent; flex:1; font-size:14px;
+    color:#374151; font-family:'Inter',sans-serif; outline:none; width:100%;
+  }
+  .form-field select { cursor:pointer; }
+  .form-field svg { width:18px; height:18px; opacity:.45; flex-shrink:0; }
+  .btn-book-now {
+    width:100%; background:var(--green-btn); color:#fff; border:none;
+    padding:15px; border-radius:10px; font-size:16px; font-weight:700;
+    cursor:pointer; transition:.25s; box-shadow:0 6px 20px rgba(46,125,50,.4);
+    font-family:'Inter',sans-serif;
+  }
+  .btn-book-now:hover { background:#2e7d32; transform:translateY(-2px); box-shadow:0 10px 28px rgba(46,125,50,.5); }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: linear-gradient(135deg,#1a4ab5 0%,#0a1f5c 60%,#2e7d32 100%);
+    padding:80px 48px; text-align:center; position:relative; overflow:hidden;
+  }
+  .final-cta::before {
+    content:''; position:absolute; inset:0;
+    background-image: radial-gradient(circle, rgba(255,255,255,.1) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .final-cta-inner { position:relative; z-index:1; }
+  .final-cta h2 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; color:#fff; margin-bottom:14px;
+  }
+  .final-cta p { color:rgba(255,255,255,.82); font-size:16px; margin-bottom:32px; }
+
+  /* FOOTER */
+  footer {
+    background:#0a1f5c; color:rgba(255,255,255,.55); text-align:center;
+    padding:24px; font-size:13px;
+  }
+
+  /* Responsive */
+  @media(max-width:900px){
+    nav { padding:14px 24px; }
+    .nav-links { display:none; }
+    .hero-inner { flex-direction:column; padding:60px 24px 80px; }
+    .hero-image { justify-content:center; }
+    .services { padding:70px 24px; }
+    .services-grid { grid-template-columns:1fr 1fr; }
+    .cta-section { padding:80px 24px; }
+    .cta-inner { grid-template-columns:1fr; }
+    .cta-person { display:none; }
+    .final-cta { padding:60px 24px; }
+  }
+  @media(max-width:560px){
+    .services-grid { grid-template-columns:1fr; }
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: #fff; padding: 90px 48px; position:relative; overflow:hidden;
+  }
+  .about::before {
+    content:''; position:absolute; top:-80px; right:-80px;
+    width:400px; height:400px; border-radius:50%;
+    background: radial-gradient(circle, rgba(37,99,235,.07), transparent 70%);
+    pointer-events:none;
+  }
+  .about-inner {
+    max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;
+  }
+  .about-image-wrap {
+    position:relative;
+  }
+  .about-img-main {
+    width:100%; border-radius:24px; overflow:hidden;
+    box-shadow: 0 20px 60px rgba(10,31,92,.15);
+    border: 2px solid rgba(37,99,235,.1);
+  }
+  .about-img-main img { width:100%; height:380px; object-fit:cover; display:block; }
+  .about-badge {
+    position:absolute; bottom:-24px; right:-24px;
+    background: linear-gradient(135deg,#1a4ab5,#2563eb);
+    color:#fff; border-radius:18px; padding:20px 24px;
+    box-shadow: 0 12px 32px rgba(37,99,235,.35);
+    text-align:center; min-width:130px;
+  }
+  .about-badge .num { font-family:'Plus Jakarta Sans',sans-serif; font-size:36px; font-weight:800; line-height:1; }
+  .about-badge .label { font-size:12px; opacity:.85; margin-top:4px; font-weight:500; }
+  .about-content { }
+  .about-tag {
+    display:inline-block; background:rgba(37,99,235,.1); color:var(--blue-mid);
+    font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+    padding:6px 14px; border-radius:50px; margin-bottom:18px;
+  }
+  .about-content h2 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(28px,3vw,38px);
+    font-weight:800; color:var(--navy); line-height:1.2; margin-bottom:18px;
+  }
+  .about-content h2 span { color:var(--blue-mid); }
+  .about-content p {
+    color:#4b5563; font-size:15.5px; line-height:1.8; margin-bottom:16px;
+  }
+  .about-stats {
+    display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0;
+  }
+  .stat-card {
+    background: var(--gray-100); border-radius:14px; padding:18px 20px;
+    border: 1px solid rgba(37,99,235,.08);
+  }
+  .stat-card .stat-num {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:26px; font-weight:800;
+    color:var(--blue-mid); margin-bottom:4px;
+  }
+  .stat-card .stat-label { font-size:13px; color:#6b7280; font-weight:500; }
+  .about-values { display:flex; flex-direction:column; gap:12px; margin-top:8px; }
+  .about-value-item { display:flex; align-items:flex-start; gap:12px; }
+  .value-dot {
+    width:10px; height:10px; border-radius:50%; background:var(--green-btn);
+    flex-shrink:0; margin-top:6px;
+  }
+  .about-value-item p { color:#374151; font-size:14.5px; line-height:1.6; margin:0; }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--gray-100); padding: 90px 48px; position:relative; overflow:hidden;
+  }
+  .contact::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 60% 50% at 20% 50%, rgba(37,99,235,.06), transparent),
+                radial-gradient(ellipse 50% 50% at 80% 50%, rgba(0,201,177,.05), transparent);
+    pointer-events:none;
+  }
+  .contact-inner {
+    max-width:1200px; margin:0 auto; position:relative; z-index:1;
+  }
+  .contact-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:48px; align-items:start;
+  }
+  .contact-info h3 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:800;
+    color:var(--navy); margin-bottom:12px;
+  }
+  .contact-info p { color:#4b5563; font-size:15px; line-height:1.8; margin-bottom:28px; }
+  .contact-cards { display:flex; flex-direction:column; gap:16px; }
+  .contact-card {
+    display:flex; align-items:center; gap:18px;
+    background: rgba(255,255,255,.85); backdrop-filter:blur(12px);
+    border: 1px solid rgba(255,255,255,.9); border-radius:16px;
+    padding:20px 22px;
+    box-shadow:0 4px 20px rgba(10,31,92,.07);
+    text-decoration:none; transition:.25s;
+  }
+  .contact-card:hover { transform:translateY(-3px); box-shadow:0 10px 32px rgba(10,31,92,.12); }
+  .contact-card-icon {
+    width:52px; height:52px; border-radius:14px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .contact-card-icon.email-icon { background:linear-gradient(135deg,#1a4ab5,#2563eb); }
+  .contact-card-icon.wa-icon { background:linear-gradient(135deg,#25d366,#128c7e); }
+  .contact-card-icon svg { width:26px; height:26px; }
+  .contact-card-body { }
+  .contact-card-body .c-label { font-size:12px; color:#9ca3af; font-weight:600; letter-spacing:.8px; text-transform:uppercase; margin-bottom:4px; }
+  .contact-card-body .c-value { font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700; color:var(--navy); }
+  .contact-card-body .c-hint { font-size:12.5px; color:#6b7280; margin-top:2px; }
+
+  /* contact map/info panel */
+  .contact-panel {
+    background: linear-gradient(135deg,#0a1f5c,#1a4ab5);
+    border-radius:24px; padding:36px 32px;
+    color:#fff; position:relative; overflow:hidden;
+    box-shadow:0 20px 50px rgba(10,31,92,.25);
+  }
+  .contact-panel::before {
+    content:''; position:absolute; inset:0;
+    background-image: radial-gradient(circle, rgba(255,255,255,.1) 1px, transparent 1px);
+    background-size:28px 28px; pointer-events:none;
+  }
+  .contact-panel-inner { position:relative; z-index:1; }
+  .contact-panel h3 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:800;
+    margin-bottom:8px;
+  }
+  .contact-panel p { opacity:.8; font-size:14.5px; line-height:1.7; margin-bottom:28px; }
+  .hours-list { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+  .hours-list li {
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:14px; border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:10px;
+  }
+  .hours-list li:last-child { border:none; padding:0; }
+  .hours-list .day { opacity:.75; }
+  .hours-list .time { font-weight:600; color:#00c9b1; }
+  .social-row { display:flex; gap:12px; margin-top:8px; }
+  .soc-btn {
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
+    border-radius:10px; padding:10px 16px; color:#fff; text-decoration:none;
+    font-size:13.5px; font-weight:600; transition:.2s;
+  }
+  .soc-btn:hover { background:rgba(255,255,255,.2); }
+  .soc-btn svg { width:18px; height:18px; }
+
+  @media(max-width:900px){
+    .about-inner, .contact-grid { grid-template-columns:1fr; }
+    .about-badge { right:16px; bottom:-16px; }
+    .about { padding:70px 24px; }
+    .contact { padding:70px 24px; }
+  }
+
+  /* ── BOOKING FORM STATES ── */
+  .field-error {
+    color:#dc2626; font-size:12.5px; margin:-10px 0 10px 4px;
+    min-height:16px; transition:.2s;
+  }
+  .form-field.error {
+    border-color:#dc2626 !important;
+    background:#fff5f5 !important;
+    box-shadow:0 0 0 3px rgba(220,38,38,.08) !important;
+  }
+  .form-field.success {
+    border-color:#16a34a !important;
+    background:#f0fdf4 !important;
+  }
+  .form-error-banner {
+    background:#fff5f5; border:1.5px solid #fca5a5;
+    border-radius:10px; padding:12px 14px;
+    color:#dc2626; font-size:13.5px; font-weight:500;
+    margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .btn-book-now { display:flex; align-items:center; justify-content:center; gap:8px; }
+  .btn-book-now:disabled { opacity:.7; cursor:not-allowed; transform:none !important; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .spin { animation:spin .8s linear infinite; }
+  .success-icon { animation:popIn .4s cubic-bezier(.17,.67,.35,1.3) both; }
+  @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+  .booking-id-badge {
+    display:inline-block; background:linear-gradient(135deg,#0a1f5c,#1a4ab5);
+    color:#fff; font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:18px; font-weight:800; letter-spacing:2px;
+    padding:10px 24px; border-radius:10px; margin-top:10px;
+    box-shadow:0 4px 16px rgba(26,74,181,.3);
+  }
+
+  /* ── BOOKING FORM STATES ── */
+  .form-field.error   { border-color:#ef4444 !important; background:#fff5f5 !important; }
+  .form-field.success { border-color:#22c55e !important; }
+  .booking-toast {
+    border-radius:10px; padding:14px 16px; margin-bottom:16px;
+    font-size:14px; font-weight:500; line-height:1.5;
+    animation: toastIn .3s ease;
+  }
+  .booking-toast.toast-success { background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; }
+  .booking-toast.toast-error   { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
+  @keyframes toastIn  { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+  @keyframes spin     { to{transform:rotate(360deg)} }
+  .btn-book-now:disabled { opacity:.7; cursor:not-allowed; transform:none !important; }
+
+  /* ── MOBILE HAMBURGER ── */
+  .hamburger {
+    display:none; flex-direction:column; gap:5px; cursor:pointer;
+    background:none; border:none; padding:6px; z-index:200;
+  }
+  .hamburger span {
+    display:block; width:24px; height:2.5px; border-radius:2px;
+    background:#fff; transition:.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform:translateY(7.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7.5px) rotate(-45deg); }
+  .mobile-nav {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+    background:rgba(10,31,92,.97); backdrop-filter:blur(20px);
+    z-index:150; flex-direction:column; align-items:center; justify-content:center;
+    gap:36px;
+  }
+  .mobile-nav.open { display:flex; animation:mnavIn .3s ease; }
+  @keyframes mnavIn { from{opacity:0;transform:scale(.97)} to{opacity:1;transform:none} }
+  .mobile-nav a {
+    color:#fff; font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:26px; font-weight:700; text-decoration:none;
+    opacity:.8; transition:.2s; letter-spacing:.5px;
+  }
+  .mobile-nav a:hover { opacity:1; color:#00c9b1; }
+  .mobile-nav .m-book {
+    background:var(--green-btn); color:#fff !important; opacity:1 !important;
+    padding:14px 36px; border-radius:12px; font-size:18px !important;
+    box-shadow:0 6px 20px rgba(46,125,50,.4);
+  }
+  @media(max-width:900px){
+    .hamburger { display:flex; }
+    .nav-links, nav .btn-book { display:none; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity:0; transform:translateY(32px); transition:opacity .65s ease, transform .65s ease;
+  }
+  .reveal.visible { opacity:1; transform:none; }
+  .reveal-left  { opacity:0; transform:translateX(-32px); transition:opacity .65s ease, transform .65s ease; }
+  .reveal-right { opacity:0; transform:translateX(32px);  transition:opacity .65s ease, transform .65s ease; }
+  .reveal-left.visible, .reveal-right.visible { opacity:1; transform:none; }
+
+  /* ── COURSES SECTION ── */
+  .courses {
+    background:#fff; padding:90px 48px; position:relative; overflow:hidden;
+  }
+  .courses::before {
+    content:''; position:absolute; bottom:-60px; left:-60px;
+    width:350px; height:350px; border-radius:50%;
+    background:radial-gradient(circle, rgba(0,201,177,.07), transparent 70%);
+    pointer-events:none;
+  }
+  .courses-grid {
+    max-width:1200px; margin:0 auto; position:relative; z-index:1;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  }
+  .course-card {
+    border-radius:20px; overflow:hidden; position:relative;
+    box-shadow:0 8px 32px rgba(10,31,92,.1);
+    transition:.3s; cursor:pointer;
+    border:1px solid rgba(10,31,92,.06);
+  }
+  .course-card:hover { transform:translateY(-8px); box-shadow:0 20px 48px rgba(10,31,92,.15); }
+  .course-card-img {
+    height:190px; overflow:hidden; position:relative;
+  }
+  .course-card-img img { width:100%; height:100%; object-fit:cover; transition:.4s; display:block; }
+  .course-card:hover .course-card-img img { transform:scale(1.07); }
+  .course-card-img::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(to bottom, transparent 40%, rgba(10,31,92,.6));
+  }
+  .course-badge {
+    position:absolute; top:14px; left:14px; z-index:2;
+    background:var(--green-btn); color:#fff;
+    font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    padding:4px 12px; border-radius:50px;
+  }
+  .course-card-body { padding:22px 24px 26px; background:#fff; }
+  .course-card-body h4 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:17px; font-weight:800;
+    color:var(--navy); margin-bottom:8px;
+  }
+  .course-card-body p { font-size:13.5px; color:#6b7280; line-height:1.65; margin-bottom:16px; }
+  .course-meta {
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:12.5px; color:#9ca3af;
+  }
+  .course-meta span { display:flex; align-items:center; gap:5px; }
+  .course-meta svg { width:14px; height:14px; }
+  .course-enroll {
+    display:inline-block; margin-top:16px; background:var(--navy); color:#fff;
+    padding:10px 20px; border-radius:8px; font-size:13px; font-weight:600;
+    text-decoration:none; transition:.2s; border:none; cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .course-enroll:hover { background:var(--blue-mid); }
+  @media(max-width:900px){ .courses-grid { grid-template-columns:1fr 1fr; } .courses { padding:70px 24px; } }
+  @media(max-width:560px){ .courses-grid { grid-template-columns:1fr; } }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    background: linear-gradient(135deg,#0a1f5c 0%,#1a4ab5 60%,#0d6e8a 100%);
+    padding:90px 48px; position:relative; overflow:hidden;
+  }
+  .testimonials::before {
+    content:''; position:absolute; inset:0;
+    background-image:radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+    background-size:36px 36px; pointer-events:none;
+  }
+  .testimonials .section-header h2 { color:#fff; }
+  .testimonials .section-header p  { color:rgba(255,255,255,.75); }
+  .testi-grid {
+    max-width:1200px; margin:0 auto; position:relative; z-index:1;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .testi-card {
+    background:rgba(255,255,255,.1); backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.2); border-radius:20px;
+    padding:28px 26px; transition:.3s;
+  }
+  .testi-card:hover { background:rgba(255,255,255,.16); transform:translateY(-4px); }
+  .testi-stars { color:#fbbf24; font-size:16px; letter-spacing:2px; margin-bottom:14px; }
+  .testi-text {
+    color:rgba(255,255,255,.9); font-size:14.5px; line-height:1.75;
+    font-style:italic; margin-bottom:22px;
+  }
+  .testi-author { display:flex; align-items:center; gap:12px; }
+  .testi-avatar {
+    width:44px; height:44px; border-radius:50%; overflow:hidden;
+    border:2px solid rgba(255,255,255,.3); flex-shrink:0;
+  }
+  .testi-avatar img { width:100%; height:100%; object-fit:cover; }
+  .testi-name { font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700; color:#fff; }
+  .testi-role { font-size:12px; color:rgba(255,255,255,.6); margin-top:2px; }
+  @media(max-width:900px){ .testi-grid { grid-template-columns:1fr; } .testimonials { padding:70px 24px; } }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background:var(--navy); padding:40px 48px;
+    display:flex; justify-content:center; gap:0;
+  }
+  .stat-item {
+    text-align:center; flex:1; max-width:220px;
+    border-right:1px solid rgba(255,255,255,.12);
+    padding:0 32px;
+  }
+  .stat-item:last-child { border:none; }
+  .stat-item .s-num {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:38px; font-weight:800;
+    color:#00c9b1; line-height:1; margin-bottom:6px;
+  }
+  .stat-item .s-label { color:rgba(255,255,255,.7); font-size:13.5px; font-weight:500; }
+  @media(max-width:700px){
+    .stats-bar { flex-wrap:wrap; padding:32px 24px; gap:24px; }
+    .stat-item { border:none; min-width:40%; }
+  }
+
+  /* ── RICH FOOTER ── */
+  .site-footer {
+    background:#050f2e; color:rgba(255,255,255,.6); padding:64px 48px 28px;
+  }
+  .footer-grid {
+    max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px;
+    padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .footer-brand .f-logo { height:56px; width:auto; margin-bottom:18px; }
+  .footer-brand p { font-size:14px; line-height:1.8; max-width:280px; color:rgba(255,255,255,.55); }
+  .footer-social { display:flex; gap:10px; margin-top:20px; }
+  .footer-social a {
+    width:38px; height:38px; border-radius:10px;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; text-decoration:none; transition:.2s; font-size:16px;
+  }
+  .footer-social a:hover { background:var(--blue-mid); border-color:var(--blue-mid); }
+  .footer-col h5 {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700;
+    color:#fff; margin-bottom:18px; letter-spacing:.3px;
+  }
+  .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .footer-col ul li a {
+    color:rgba(255,255,255,.55); text-decoration:none; font-size:13.5px;
+    transition:.2s; display:flex; align-items:center; gap:6px;
+  }
+  .footer-col ul li a:hover { color:#00c9b1; }
+  .footer-col ul li a::before { content:'→'; font-size:11px; opacity:.5; }
+  .footer-contact-item {
+    display:flex; align-items:flex-start; gap:10px; margin-bottom:12px;
+    font-size:13.5px; color:rgba(255,255,255,.6);
+  }
+  .footer-contact-item svg { width:16px; height:16px; flex-shrink:0; margin-top:2px; opacity:.6; }
+  .footer-contact-item a { color:rgba(255,255,255,.6); text-decoration:none; transition:.2s; }
+  .footer-contact-item a:hover { color:#00c9b1; }
+  .footer-bottom {
+    max-width:1200px; margin:0 auto; padding-top:24px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:12.5px;
+  }
+  .footer-bottom a { color:rgba(255,255,255,.4); text-decoration:none; transition:.2s; }
+  .footer-bottom a:hover { color:#fff; }
+  @media(max-width:900px){
+    .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
+    .site-footer { padding:48px 24px 24px; }
+    .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
+  }
+  @media(max-width:560px){ .footer-grid { grid-template-columns:1fr; } }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position:fixed; bottom:28px; right:28px; z-index:99;
+    width:46px; height:46px; border-radius:12px;
+    background:var(--blue-mid); color:#fff; border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 20px rgba(37,99,235,.4);
+    opacity:0; transform:translateY(12px);
+    transition:opacity .3s, transform .3s; pointer-events:none;
+  }
+  .back-top.show { opacity:1; transform:none; pointer-events:auto; }
+  .back-top:hover { background:var(--navy); }
+  .back-top svg { width:18px; height:18px; }
+
+  /* ── ACTIVE NAV LINK ── */
+  .nav-links a.nav-active { color:#00c9b1 !important; }
+
+  /* ── PRICING ── */
+  .pricing {
+    background:#fff; padding:90px 48px; position:relative; overflow:hidden;
+  }
+  .pricing::before {
+    content:''; position:absolute; top:-120px; left:-120px;
+    width:500px; height:500px; border-radius:50%;
+    background:radial-gradient(circle, rgba(37,99,235,.05), transparent 70%);
+    pointer-events:none;
+  }
+  .pricing-grid {
+    max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  }
+  .price-card {
+    border-radius:22px; padding:36px 30px;
+    border:2px solid #e5e7eb;
+    background:#fff; position:relative;
+    transition:.3s; text-align:center;
+  }
+  .price-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(10,31,92,.1); }
+  .price-card.featured {
+    background:linear-gradient(160deg,#0a1f5c,#1a4ab5);
+    border-color:transparent;
+    box-shadow:0 20px 60px rgba(10,31,92,.3);
+    transform:scale(1.04);
+  }
+  .price-card.featured:hover { transform:scale(1.04) translateY(-6px); }
+  .price-badge {
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    background:linear-gradient(90deg,#3a8f3e,#00c9b1);
+    color:#fff; font-size:11px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; padding:5px 18px; border-radius:50px;
+    white-space:nowrap;
+  }
+  .price-icon {
+    width:60px; height:60px; border-radius:16px; margin:0 auto 18px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .price-card:not(.featured) .price-icon { background:rgba(37,99,235,.08); }
+  .price-card.featured .price-icon { background:rgba(255,255,255,.15); }
+  .price-icon svg { width:30px; height:30px; }
+  .price-name {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700;
+    margin-bottom:6px;
+  }
+  .price-card:not(.featured) .price-name { color:var(--navy); }
+  .price-card.featured .price-name { color:#fff; }
+  .price-desc { font-size:13px; color:#6b7280; margin-bottom:22px; }
+  .price-card.featured .price-desc { color:rgba(255,255,255,.7); }
+  .price-amount {
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:42px; font-weight:800;
+    line-height:1; margin-bottom:4px;
+  }
+  .price-card:not(.featured) .price-amount { color:var(--navy); }
+  .price-card.featured .price-amount { color:#fff; }
+  .price-amount span { font-size:18px; font-weight:500; vertical-align:super; margin-right:2px; }
+  .price-period { font-size:13px; color:#9ca3af; margin-bottom:28px; }
+  .price-card.featured .price-period { color:rgba(255,255,255,.55); }
+  .price-features { list-style:none; text-align:left; margin-bottom:28px; display:flex; flex-direction:column; gap:10px; }
+  .price-features li {
+    display:flex; align-items:center; gap:10px;
+    font-size:14px;
+  }
+  .price-card:not(.featured) .price-features li { color:#374151; }
+  .price-card.featured .price-features li { color:rgba(255,255,255,.9); }
+  .price-features li svg { width:17px; height:17px; flex-shrink:0; }
+  .btn-price {
+    display:block; text-align:center; padding:13px;
+    border-radius:10px; font-weight:700; font-size:14px;
+    text-decoration:none; transition:.25s;
+  }
+  .price-card:not(.featured) .btn-price {
+    background:rgba(37,99,235,.08); color:var(--blue-mid);
+    border:1.5px solid rgba(37,99,235,.2);
+  }
+  .price-card:not(.featured) .btn-price:hover {
+    background:var(--blue-mid); color:#fff;
+  }
+  .price-card.featured .btn-price {
+    background:#3a8f3e; color:#fff;
+    box-shadow:0 6px 20px rgba(46,125,50,.4);
+  }
+  .price-card.featured .btn-price:hover { background:#2e7d32; }
+
+  /* ── FAQ ── */
+  .faq { background:var(--gray-100); padding:90px 48px; }
+  .faq-inner { max-width:820px; margin:0 auto; }
+  .faq-list { margin-top:48px; display:flex; flex-direction:column; gap:14px; }
+  .faq-item {
+    background:#fff; border-radius:14px;
+    border:1px solid rgba(37,99,235,.08);
+    overflow:hidden;
+    box-shadow:0 2px 12px rgba(10,31,92,.05);
+    transition:.25s;
+  }
+  .faq-item.open { box-shadow:0 8px 28px rgba(10,31,92,.1); }
+  .faq-q {
+    width:100%; display:flex; align-items:center; justify-content:space-between;
+    padding:20px 24px; background:none; border:none; cursor:pointer;
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); text-align:left; gap:16px;
+  }
+  .faq-q:hover { color:var(--blue-mid); }
+  .faq-arrow {
+    width:28px; height:28px; border-radius:50%; flex-shrink:0;
+    background:rgba(37,99,235,.08); display:flex; align-items:center; justify-content:center;
+    transition:.3s;
+  }
+  .faq-item.open .faq-arrow { background:var(--blue-mid); transform:rotate(180deg); }
+  .faq-arrow svg { width:14px; height:14px; }
+  .faq-item.open .faq-arrow svg path { stroke:#fff; }
+  .faq-a {
+    max-height:0; overflow:hidden; transition:max-height .35s ease, padding .3s;
+    font-size:14.5px; color:#4b5563; line-height:1.8;
+    padding:0 24px;
+  }
+  .faq-item.open .faq-a { max-height:300px; padding:0 24px 20px; }
+
+  /* ── ACTIVE NAV ── */
+  .nav-links a.nav-active { color:#fff; position:relative; }
+  .nav-links a.nav-active::after {
+    content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px;
+    background:var(--teal); border-radius:1px;
+  }
+
+  @media(max-width:900px){
+    .pricing-grid { grid-template-columns:1fr; max-width:420px; margin:0 auto; }
+    .price-card.featured { transform:none; }
+    .pricing, .faq { padding:70px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#"><img class="logo-img" src="data:image/png;base64,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" alt="Bright Path Logo"></a>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#courses">Courses</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#booking" class="btn-book">Book Now</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#" onclick="closeMobileNav()">Home</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#courses" onclick="closeMobileNav()">Courses</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <a href="#booking" class="m-book" onclick="closeMobileNav()">Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Empowering Your<br>Bright Future</h1>
+      <p>CBT Practice, Computer Training &amp;<br>Digital Skills Development</p>
+      <a href="#services" class="btn-started">Get Started</a>
+    </div>
+    <div class="hero-image">
+      <div class="hero-slideshow" id="heroSlideshow">
+
+        <!-- Slide 1: Computer lab -->
+        <div class="slide active">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&q=80" alt="Computer lab training">
+          <div class="slide-caption">
+            <div class="cap-title">World-Class Computer Labs</div>
+            <div class="cap-sub">Fully equipped with high-speed internet</div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Students learning -->
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80" alt="Students learning digital skills">
+          <div class="slide-caption">
+            <div class="cap-title">Learn In-Demand Digital Skills</div>
+            <div class="cap-sub">Programming, Web Dev & Cybersecurity</div>
+          </div>
+        </div>
+
+        <!-- Slide 3: CBT exam practice -->
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=900&q=80" alt="CBT exam practice">
+          <div class="slide-caption">
+            <div class="cap-title">CBT Exam Practice & Training</div>
+            <div class="cap-sub">Achieve your best results with guided prep</div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Group training -->
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80" alt="Group training session">
+          <div class="slide-caption">
+            <div class="cap-title">Expert-Led Group Sessions</div>
+            <div class="cap-sub">Learn alongside motivated peers</div>
+          </div>
+        </div>
+
+                <!-- Slide 5: Coding close-up -->
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&q=80" alt="Programming courses">
+          <div class="slide-caption">
+            <div class="cap-title">Python &amp; Web Development</div>
+            <div class="cap-sub">Build real-world apps from scratch</div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Cybersecurity -->
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80" alt="Cybersecurity training">
+          <div class="slide-caption">
+            <div class="cap-title">Cybersecurity Training</div>
+            <div class="cap-sub">Protect systems &amp; launch your IT career</div>
+          </div>
+        </div>
+
+        <!-- Slide 7: Graduation / certificate -->
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=900&q=80" alt="Earning your certificate">
+          <div class="slide-caption">
+            <div class="cap-title">Earn Recognised Certificates</div>
+            <div class="cap-sub">Boost your career &amp; academic prospects</div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Bright Path branded blue shirt + logo -->
+        <div class="slide slide-shirt">
+          <img class="shirt-photo" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80" alt="Bright Path team member">
+          <div class="shirt-tint"></div>
+          <div class="shirt-logo-box">
+            <img class="shirt-logo-overlay" src="data:image/png;base64,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" alt="Bright Path Logo">
+            <div class="shirt-badge">Bright Path Team</div>
+          </div>
+          <div class="slide-caption">
+            <div class="cap-title">The Bright Path Family</div>
+            <div class="cap-sub">Passionate educators, real results</div>
+          </div>
+        </div>
+
+        <!-- Arrows -->
+        <button class="slide-arrow prev" onclick="moveSlide(-1)">
+          <svg viewBox="0 0 16 16" fill="none"><polyline points="10,3 5,8 10,13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="slide-arrow next" onclick="moveSlide(1)">
+          <svg viewBox="0 0 16 16" fill="none"><polyline points="6,3 11,8 6,13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <!-- Dots -->
+        <div class="hero-dots" id="heroDots">
+          <div class="hero-dot active" onclick="goSlide(0)"></div>
+          <div class="hero-dot" onclick="goSlide(1)"></div>
+          <div class="hero-dot" onclick="goSlide(2)"></div>
+          <div class="hero-dot" onclick="goSlide(3)"></div>
+          <div class="hero-dot" onclick="goSlide(4)"></div>
+          <div class="hero-dot" onclick="goSlide(5)"></div>
+          <div class="hero-dot" onclick="goSlide(6)"></div>
+          <div class="hero-dot" onclick="goSlide(7)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <h2>Our Services</h2>
+    <p>We offer a range of services to help you succeed in today's digital world.</p>
+  </div>
+  <div class="services-grid">
+
+    <!-- CBT Training -->
+    <div class="service-card">
+      <div class="service-icon" style="margin:0 auto 20px;">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="30" height="20" rx="3" stroke="#1a4ab5" stroke-width="2"/>
+          <polyline points="10,17 14,21 24,13" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="12" y1="30" x2="22" y2="30" stroke="#1a4ab5" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>CBT Training</h3>
+      <p>Professional CBT practice and evaluation. Access NC-based training modules designed for real exam success.</p>
+      <a href="#" class="learn-more">Learn More &rsaquo;</a>
+    </div>
+
+    <!-- Computer Training -->
+    <div class="service-card">
+      <div class="service-icon" style="margin:0 auto 20px;">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="5" width="28" height="18" rx="3" stroke="#1a4ab5" stroke-width="2"/>
+          <line x1="12" y1="28" x2="22" y2="28" stroke="#1a4ab5" stroke-width="2" stroke-linecap="round"/>
+          <line x1="17" y1="23" x2="17" y2="28" stroke="#1a4ab5" stroke-width="2"/>
+          <path d="M9 14 C10 10 14 8 17 11" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="21" cy="13" r="3" stroke="#00c9b1" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <h3>Computer Training</h3>
+      <p>Learn digital productivity tools and software used in the modern workplace. Build a strong computing foundation.</p>
+      <a href="#" class="learn-more">Learn More &rsaquo;</a>
+    </div>
+
+    <!-- Programming -->
+    <div class="service-card">
+      <div class="service-icon" style="margin:0 auto 20px;">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="5" width="30" height="22" rx="3" stroke="#1a4ab5" stroke-width="2"/>
+          <rect x="2" y="5" width="30" height="6" rx="3" fill="#1a4ab5" opacity=".15"/>
+          <circle cx="7" cy="8" r="1.5" fill="#e55"/>
+          <circle cx="12" cy="8" r="1.5" fill="#fa0"/>
+          <circle cx="17" cy="8" r="1.5" fill="#2e7d32"/>
+          <polyline points="10,18 14,22 10,26" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="17" y1="24" x2="24" y2="24" stroke="#00c9b1" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Programming Courses</h3>
+      <p>Learn programming with Python, web development, and more. Build real-world apps that launch your tech career.</p>
+      <a href="#" class="learn-more">Learn More &rsaquo;</a>
+    </div>
+
+    <!-- Cybersecurity -->
+    <div class="service-card">
+      <div class="service-icon" style="margin:0 auto 20px;">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 3 L29 8 L29 18 C29 24 23 29 17 31 C11 29 5 24 5 18 L5 8 Z" stroke="#2e7d32" stroke-width="2" fill="rgba(46,125,50,.1)"/>
+          <circle cx="17" cy="16" r="4" stroke="#2e7d32" stroke-width="2"/>
+          <line x1="17" y1="20" x2="17" y2="24" stroke="#2e7d32" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="17" cy="25" r="1.5" fill="#2e7d32"/>
+        </svg>
+      </div>
+      <h3>Cybersecurity Training</h3>
+      <p>Become a digital defender. Learn ethical hacking, network security, and cybersecurity best practices.</p>
+      <a href="#" class="learn-more">Learn More &rsaquo;</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="s-num" data-target="500">0</div>
+    <div class="s-label">Students Trained</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="s-num" data-target="20">0</div>
+    <div class="s-label">Courses Offered</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="s-num" data-target="98">0</div>
+    <div class="s-label">% Pass Rate</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="s-num" data-target="5">0</div>
+    <div class="s-label">Years of Excellence</div>
+  </div>
+</div>
+
+<!-- CTA + BOOKING -->
+<section class="cta-section" id="booking">
+  <div class="cta-wave-top"></div>
+
+  <!-- floating person image (positioned absolutely) -->
+  <img class="cta-person"
+    src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=400&q=80"
+    alt="Student"
+    style="border-radius:0;"
+  >
+
+  <div class="cta-inner">
+    <!-- LEFT -->
+    <div class="cta-left">
+      <h2>Learn In-Demand<br>Digital Skills</h2>
+      <p>Gain valuable skills in high-demand technology fields and advance your career.</p>
+      <ul class="checklist">
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 6,11 12,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          Basic Computer Skills
+        </li>
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 6,11 12,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          Web Development
+        </li>
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 6,11 12,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          Python Programming
+        </li>
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 6,11 12,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          Cybersecurity Training
+        </li>
+      </ul>
+      <a href="#" class="btn-courses">View All Courses</a>
+    </div>
+
+    <!-- RIGHT: Booking card -->
+    <div class="booking-card" id="bookingCard">
+      <!-- Default form view -->
+      <div id="bookingForm">
+        <h3>Easy Booking</h3>
+        <p>Reserve Your Spot Now</p>
+
+        <div class="form-field" id="field-name">
+          <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="4" stroke="#6b7280" stroke-width="1.5"/><path d="M2 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input type="text" id="inp-name" placeholder="Full Name" autocomplete="name">
+        </div>
+        <div class="field-error" id="err-name"></div>
+
+        <div class="form-field" id="field-email">
+          <svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="11" rx="2" stroke="#6b7280" stroke-width="1.5"/><polyline points="2,7 9,11 16,7" stroke="#6b7280" stroke-width="1.5"/></svg>
+          <input type="email" id="inp-email" placeholder="Email Address" autocomplete="email">
+        </div>
+        <div class="field-error" id="err-email"></div>
+
+        <div class="form-field" id="field-phone">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M3 3h3l1.5 4-2 1.2c1 2 2.8 3.8 4.8 4.8L11.5 11l4 1.5V16c0 1.1-.9 2-2 2C6.5 18 0 11.5 0 5c0-1.1.9-2 2-2h1z" stroke="#6b7280" stroke-width="1.2" stroke-linejoin="round" transform="translate(2,0) scale(.9)"/></svg>
+          <input type="tel" id="inp-phone" placeholder="Phone Number" autocomplete="tel">
+        </div>
+        <div class="field-error" id="err-phone"></div>
+
+        <div class="form-field" id="field-service">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M15 7H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z" stroke="#6b7280" stroke-width="1.5"/><path d="M13 7V5a4 4 0 0 0-8 0v2" stroke="#6b7280" stroke-width="1.5"/></svg>
+          <select id="inp-service">
+            <option value="" disabled selected>Select Service</option>
+            <option>CBT Training</option>
+            <option>Computer Training</option>
+            <option>Programming Courses</option>
+            <option>Cybersecurity Training</option>
+          </select>
+        </div>
+        <div class="field-error" id="err-service"></div>
+
+        <!-- Global error banner -->
+        <div class="form-error-banner" id="formErrorBanner" style="display:none"></div>
+
+        <button class="btn-book-now" id="btnBookNow" onclick="submitBooking()">
+          <span id="btnText">Book Now</span>
+          <span id="btnSpinner" style="display:none">
+            <svg class="spin" viewBox="0 0 24 24" fill="none" width="20" height="20">
+              <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.3)" stroke-width="3"/>
+              <path d="M12 2a10 10 0 0 1 10 10" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            Booking...
+          </span>
+        </button>
+      </div>
+
+      <!-- Success view -->
+      <div id="bookingSuccess" style="display:none;text-align:center;padding:12px 0">
+        <div class="success-icon">
+          <svg viewBox="0 0 60 60" fill="none" width="60" height="60">
+            <circle cx="30" cy="30" r="28" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+            <polyline points="18,30 26,38 42,22" stroke="#2e7d32" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 style="color:#0a1f5c;margin:16px 0 8px">Booking Confirmed!</h3>
+        <p style="color:#6b7280;font-size:14px;margin-bottom:6px">Your spot has been reserved.</p>
+        <div class="booking-id-badge" id="bookingIdBadge"></div>
+        <p style="color:#6b7280;font-size:13px;margin:16px 0 0;line-height:1.7">
+          A confirmation email is on its way to you.<br>
+          Our team will contact you within <strong>24 hours</strong>.
+        </p>
+        <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <a href="https://wa.me/2348131295835" target="_blank"
+             style="display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13.5px;font-weight:600">
+            <svg viewBox="0 0 18 18" fill="white" width="16" height="16"><path d="M9 1C4.5 1 1 4.5 1 9c0 1.4.4 2.8 1.1 4L1 17l4.2-1.1A8 8 0 1 0 9 1z"/></svg>
+            WhatsApp Us
+          </a>
+          <button onclick="resetBookingForm()"
+             style="background:#f4f6fb;color:#0a1f5c;border:1.5px solid #e5e7eb;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13.5px;font-weight:600;font-family:inherit">
+            Book Another
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-wave-bot"></div>
+</section>
+
+<!-- COURSES -->
+<section class="courses" id="courses">
+  <div class="section-header reveal">
+    <h2>Our Popular Courses</h2>
+    <p>Practical, industry-relevant training designed to get you results fast.</p>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card reveal">
+      <div class="course-card-img">
+        <span class="course-badge">Most Popular</span>
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" alt="CBT Training">
+      </div>
+      <div class="course-card-body">
+        <h4>CBT Exam Practice</h4>
+        <p>Full-length mock exams, timed practice sessions, and real exam simulations for JAMB, WAEC, NECO and professional certifications.</p>
+        <div class="course-meta">
+          <span><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/></svg> 4 Weeks</span>
+          <span><svg viewBox="0 0 14 14" fill="none"><path d="M7 1L9 5l4.5.7-3.3 3.2.8 4.5L7 11.3 2.9 13.4l.8-4.5L.5 5.7 5 5z" stroke="#9ca3af" stroke-width="1.2"/></svg> Beginner</span>
+        </div>
+        <button class="course-enroll" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-card-img">
+        <span class="course-badge">In Demand</span>
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80" alt="Web Development">
+      </div>
+      <div class="course-card-body">
+        <h4>Web Development</h4>
+        <p>Learn HTML, CSS, JavaScript and build real websites from scratch. Perfect for beginners looking to start a career in tech.</p>
+        <div class="course-meta">
+          <span><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/></svg> 8 Weeks</span>
+          <span><svg viewBox="0 0 14 14" fill="none"><path d="M7 1L9 5l4.5.7-3.3 3.2.8 4.5L7 11.3 2.9 13.4l.8-4.5L.5 5.7 5 5z" stroke="#9ca3af" stroke-width="1.2"/></svg> Beginner</span>
+        </div>
+        <button class="course-enroll" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-card-img">
+        <span class="course-badge">New</span>
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" alt="Python Programming">
+      </div>
+      <div class="course-card-body">
+        <h4>Python Programming</h4>
+        <p>From variables to automation and data analysis. Learn the world's most popular programming language with hands-on projects.</p>
+        <div class="course-meta">
+          <span><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/></svg> 6 Weeks</span>
+          <span><svg viewBox="0 0 14 14" fill="none"><path d="M7 1L9 5l4.5.7-3.3 3.2.8 4.5L7 11.3 2.9 13.4l.8-4.5L.5 5.7 5 5z" stroke="#9ca3af" stroke-width="1.2"/></svg> Intermediate</span>
+        </div>
+        <button class="course-enroll" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-card-img">
+        <span class="course-badge">Popular</span>
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80" alt="Cybersecurity">
+      </div>
+      <div class="course-card-body">
+        <h4>Cybersecurity Fundamentals</h4>
+        <p>Understand threats, ethical hacking, network security and how to protect digital assets. A growing career field in Nigeria.</p>
+        <div class="course-meta">
+          <span><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/></svg> 6 Weeks</span>
+          <span><svg viewBox="0 0 14 14" fill="none"><path d="M7 1L9 5l4.5.7-3.3 3.2.8 4.5L7 11.3 2.9 13.4l.8-4.5L.5 5.7 5 5z" stroke="#9ca3af" stroke-width="1.2"/></svg> Intermediate</span>
+        </div>
+        <button class="course-enroll" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-card-img">
+        <span class="course-badge">Essential</span>
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80" alt="Computer Skills">
+      </div>
+      <div class="course-card-body">
+        <h4>Basic Computer Skills</h4>
+        <p>Microsoft Word, Excel, PowerPoint, email and internet fundamentals. Build the digital literacy needed for today's workplace.</p>
+        <div class="course-meta">
+          <span><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/></svg> 3 Weeks</span>
+          <span><svg viewBox="0 0 14 14" fill="none"><path d="M7 1L9 5l4.5.7-3.3 3.2.8 4.5L7 11.3 2.9 13.4l.8-4.5L.5 5.7 5 5z" stroke="#9ca3af" stroke-width="1.2"/></svg> Beginner</span>
+        </div>
+        <button class="course-enroll" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-card-img">
+        <span class="course-badge">Advanced</span>
+        <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&q=80" alt="Graphics & Design">
+      </div>
+      <div class="course-card-body">
+        <h4>Graphics & Digital Design</h4>
+        <p>Learn Canva, Photoshop basics, logo design, and social media content creation. Great for entrepreneurs and creatives.</p>
+        <div class="course-meta">
+          <span><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#9ca3af" stroke-width="1.2" stroke-linecap="round"/></svg> 5 Weeks</span>
+          <span><svg viewBox="0 0 14 14" fill="none"><path d="M7 1L9 5l4.5.7-3.3 3.2.8 4.5L7 11.3 2.9 13.4l.8-4.5L.5 5.7 5 5z" stroke="#9ca3af" stroke-width="1.2"/></svg> All Levels</span>
+        </div>
+        <button class="course-enroll" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Enrol Now</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <!-- Image side -->
+    <div class="about-image-wrap">
+      <div class="about-img-main">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Bright Path Training Centre">
+      </div>
+      <div class="about-badge">
+        <div class="num">5+</div>
+        <div class="label">Years of Excellence</div>
+      </div>
+    </div>
+
+    <!-- Content side -->
+    <div class="about-content">
+      <span class="about-tag">About Us</span>
+      <h2>Nigeria's Premier <span>Digital Skills</span> & CBT Training Centre</h2>
+      <p>Bright Path Digital Skills & CBT Centre was founded with a clear mission: to bridge the digital divide and empower individuals with the technology skills needed to thrive in today's fast-evolving world.</p>
+      <p>Located in the heart of our community, we provide world-class computer-based training (CBT) practice, professional IT courses, and hands-on digital skills development programmes tailored for students, job seekers, and working professionals alike.</p>
+
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Students Trained</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Courses Offered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Pass Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Corporate Partners</div>
+        </div>
+      </div>
+
+      <div class="about-values">
+        <div class="about-value-item">
+          <div class="value-dot"></div>
+          <p><strong>Expert Instructors</strong> — Our tutors are certified professionals with real-world industry experience.</p>
+        </div>
+        <div class="about-value-item">
+          <div class="value-dot"></div>
+          <p><strong>Modern Facilities</strong> — Fully equipped computer labs with high-speed internet for an immersive learning experience.</p>
+        </div>
+        <div class="about-value-item">
+          <div class="value-dot"></div>
+          <p><strong>Flexible Schedules</strong> — Morning, afternoon, and weekend classes to fit your busy lifestyle.</p>
+        </div>
+        <div class="about-value-item">
+          <div class="value-dot"></div>
+          <p><strong>Certified Training</strong> — Earn recognised certificates that boost your career and academic prospects.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="section-header">
+      <h2>Get In Touch</h2>
+      <p>Have questions or ready to enrol? Reach out — we're happy to help!</p>
+    </div>
+    <div class="contact-grid">
+      <!-- Contact cards -->
+      <div class="contact-info">
+        <h3>Contact Us Directly</h3>
+        <p>Whether you want to book a session, ask about a course, or just say hello — we're just a message away. Click below to reach us instantly.</p>
+
+        <div class="contact-cards">
+          <!-- Email -->
+          <a class="contact-card" href="/cdn-cgi/l/email-protection#b6dfc2d7dbd4c4dfd1dec2f6d1dbd7dfda98d5d9db">
+            <div class="contact-card-icon email-icon">
+              <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="5" width="22" height="16" rx="3" stroke="white" stroke-width="1.8"/>
+                <polyline points="2,8 13,15 24,8" stroke="white" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="contact-card-body">
+              <div class="c-label">Email Address</div>
+              <div class="c-value"><span class="__cf_email__" data-cfemail="a9c0ddc8c4cbdbc0cec1dde9cec4c8c0c587cac6c4">[email&#160;protected]</span></div>
+              <div class="c-hint">Click to send us an email</div>
+            </div>
+          </a>
+
+          <!-- WhatsApp -->
+          <a class="contact-card" href="https://wa.me/2348131295835" target="_blank" rel="noopener">
+            <div class="contact-card-icon wa-icon">
+              <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2C7 2 2 7 2 13c0 2 .6 3.9 1.6 5.5L2 24l5.7-1.5A11 11 0 1 0 13 2z" fill="white" opacity=".9"/>
+                <path d="M9.5 8.5c.3 0 .6.1.8.4l1 2c.2.3.1.7-.1.9l-.7.7c.5 1 1.3 1.8 2.3 2.3l.7-.7c.2-.2.6-.3.9-.1l2 1c.3.2.4.5.4.8v1.5c0 .5-.4.9-.9.9C10.5 18 8 15.5 8 9.4c0-.5.4-.9.9-.9H9.5z" fill="#25d366"/>
+              </svg>
+            </div>
+            <div class="contact-card-body">
+              <div class="c-label">WhatsApp</div>
+              <div class="c-value">+234 813 129 5835</div>
+              <div class="c-hint">Click to chat on WhatsApp</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Info panel -->
+      <div class="contact-panel">
+        <div class="contact-panel-inner">
+          <h3>Opening Hours</h3>
+          <p>We're open most days to serve you. Walk in or book in advance for a guaranteed spot.</p>
+          <ul class="hours-list">
+            <li><span class="day">Monday – Friday</span><span class="time">8:00 AM – 6:00 PM</span></li>
+            <li><span class="day">Saturday</span><span class="time">9:00 AM – 4:00 PM</span></li>
+            <li><span class="day">Sunday</span><span class="time">Closed</span></li>
+          </ul>
+          <p style="margin-bottom:16px; font-size:14px; opacity:.8;">Connect with us on social media for tips, updates and course announcements.</p>
+          <div class="social-row">
+            <a class="soc-btn" href="https://wa.me/2348131295835" target="_blank">
+              <svg viewBox="0 0 20 20" fill="white"><path d="M10 1C5 1 1 5 1 10c0 1.6.5 3.1 1.3 4.4L1 19l4.8-1.2A9 9 0 1 0 10 1zm0 16.4a7.4 7.4 0 0 1-3.8-1l-.3-.2-2.8.7.8-2.7-.2-.3A7.4 7.4 0 1 1 10 17.4z"/><path d="M7.5 6.5c-.2 0-.5.1-.7.4-.2.3-.8 1-.8 2.3s.8 2.7 1 2.9c.1.2 1.6 2.5 4 3.4 1.4.5 2 .6 2.7.4.4-.1 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1l-.3-.2-2-.9c-.2-.1-.4 0-.6.2l-.7.9c-.1.1-.3.2-.4.1-.5-.2-2-1-2.7-2.3-.1-.2 0-.4.1-.5l.5-.6c.1-.1.2-.3.1-.5l-.9-2c-.1-.3-.3-.4-.9-.5z"/></svg>
+              WhatsApp
+            </a>
+            <a class="soc-btn" href="/cdn-cgi/l/email-protection#b0d9c4d1ddd2c2d9d7d8c4f0d7ddd1d9dc9ed3dfdd">
+              <svg viewBox="0 0 20 20" fill="none"><rect x="1" y="4" width="18" height="13" rx="2.5" stroke="white" stroke-width="1.5"/><polyline points="1,6.5 10,12 19,6.5" stroke="white" stroke-width="1.5"/></svg>
+              Email Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header reveal" style="margin-bottom:48px;">
+    <h2>What Our Students Say</h2>
+    <p>Real results from real people who trained at Bright Path.</p>
+  </div>
+  <div class="testi-grid">
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Bright Path changed my life. I passed my JAMB CBT on the first attempt after just 3 weeks of practice here. The trainers are patient and the computer lab is top-notch."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" alt="Amaka">
+        </div>
+        <div>
+          <div class="testi-name">Amaka Okafor</div>
+          <div class="testi-role">JAMB Student, Port Harcourt</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I had zero coding knowledge before joining the Python course. Now I'm building my own apps. The teaching style is practical and easy to follow. Highly recommended!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Chukwuemeka">
+        </div>
+        <div>
+          <div class="testi-name">Chukwuemeka Eze</div>
+          <div class="testi-role">Python Graduate, Rivers State</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The web development course at Bright Path gave me the skills to land my first freelance job within 2 months of graduating. Worth every naira spent!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100&q=80" alt="Blessing">
+        </div>
+        <div>
+          <div class="testi-name">Blessing Nwosu</div>
+          <div class="testi-role">Web Developer, Freelancer</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section class="pricing reveal" id="pricing">
+  <div class="section-header reveal">
+    <h2>Simple, Transparent Pricing</h2>
+    <p>Choose the plan that fits your goals. No hidden fees — just great training.</p>
+  </div>
+  <div class="pricing-grid">
+
+    <!-- Starter -->
+    <div class="price-card reveal">
+      <div class="price-icon">
+        <svg viewBox="0 0 30 30" fill="none"><rect x="4" y="8" width="22" height="15" rx="3" stroke="#1a4ab5" stroke-width="1.8"/><polyline points="4,13 15,19 26,13" stroke="#00c9b1" stroke-width="1.8"/></svg>
+      </div>
+      <div class="price-name">Starter</div>
+      <div class="price-desc">Perfect for beginners exploring digital skills</div>
+      <div class="price-amount"><span>₦</span>5,000</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Basic Computer Skills</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Microsoft Office Suite</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Internet & Email Training</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 2× CBT Practice Sessions</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Certificate of Participation</li>
+      </ul>
+      <a href="#booking" class="btn-price">Get Started</a>
+    </div>
+
+    <!-- Professional (featured) -->
+    <div class="price-card featured reveal">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-icon">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M15 3 L27 8 V17 C27 23 21 27 15 29 C9 27 3 23 3 17 V8 Z" stroke="rgba(255,255,255,.8)" stroke-width="1.8" fill="rgba(255,255,255,.08)"/><polyline points="9,15 13,19 21,11" stroke="#00c9b1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="price-name">Professional</div>
+      <div class="price-desc">Full course access with CBT exam prep</div>
+      <div class="price-amount"><span>₦</span>15,000</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#00c9b1" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Starter</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#00c9b1" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Web Development (HTML/CSS/JS)</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#00c9b1" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Python Programming Basics</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#00c9b1" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited CBT Practice</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#00c9b1" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> JAMB / WAEC Prep Intensive</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#00c9b1" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Certified Course Completion</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#00c9b1" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#00c9b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> WhatsApp Support Group</li>
+      </ul>
+      <a href="#booking" class="btn-price">Enrol Now</a>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="price-card reveal">
+      <div class="price-icon">
+        <svg viewBox="0 0 30 30" fill="none"><rect x="3" y="3" width="10" height="10" rx="2" stroke="#1a4ab5" stroke-width="1.8"/><rect x="17" y="3" width="10" height="10" rx="2" stroke="#00c9b1" stroke-width="1.8"/><rect x="3" y="17" width="10" height="10" rx="2" stroke="#00c9b1" stroke-width="1.8"/><rect x="17" y="17" width="10" height="10" rx="2" stroke="#1a4ab5" stroke-width="1.8"/></svg>
+      </div>
+      <div class="price-name">Enterprise</div>
+      <div class="price-desc">Full stack training + cybersecurity for professionals</div>
+      <div class="price-amount"><span>₦</span>30,000</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Professional</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Cybersecurity Fundamentals</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Full-Stack Web Development</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Data Analysis with Python</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 1-on-1 Mentorship Sessions</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Job-Ready Portfolio Review</li>
+        <li><svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="8" fill="#2563eb" opacity=".15"/><polyline points="5,8.5 7.5,11 12,6" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Lifetime Alumni Network</li>
+      </ul>
+      <a href="#booking" class="btn-price">Get Started</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="section-header reveal">
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know before enrolling at Bright Path.</p>
+    </div>
+    <div class="faq-list reveal">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need any prior computer knowledge to enrol?
+          <div class="faq-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#1a4ab5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </button>
+        <div class="faq-a">Not at all! Our Starter courses are designed for complete beginners. We start from the very basics — switching on a computer, using a mouse, navigating the internet — and build up from there at your own pace.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What is CBT training and who is it for?
+          <div class="faq-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#1a4ab5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </button>
+        <div class="faq-a">CBT (Computer-Based Testing) training prepares students for exams that are taken on a computer, such as JAMB UTME, WAEC, NECO, BECE, and various professional certification exams. It's ideal for secondary school students, undergraduates, and anyone sitting a computer-based exam. We simulate the exact exam environment so you walk in confident on exam day.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long does it take to complete a course?
+          <div class="faq-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#1a4ab5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </button>
+        <div class="faq-a">It depends on the course. Basic Computer Skills takes 2–4 weeks. Our Web Development and Python courses run 6–12 weeks. CBT Practice sessions can be done intensively in 1–2 weeks before your exam. We also offer flexible scheduling so you can go at your own pace.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do you offer certificates after completing a course?
+          <div class="faq-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#1a4ab5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </button>
+        <div class="faq-a">Yes! Every student who completes a course receives a Bright Path Certificate of Completion. These certificates are recognised by employers and institutions across Nigeria. We also help students prepare for internationally recognised certifications like Microsoft, Google, and CompTIA.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What are your class schedules and timings?
+          <div class="faq-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#1a4ab5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </button>
+        <div class="faq-a">We offer morning sessions (8:00 AM – 12:00 PM), afternoon sessions (1:00 PM – 5:00 PM), and weekend classes (Saturday 9:00 AM – 4:00 PM). Evening classes are available on request. This flexibility means you can train without disrupting your school, work, or family commitments.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do I pay and register?
+          <div class="faq-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#1a4ab5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </button>
+        <div class="faq-a">Simply fill out the booking form on this page or send us a WhatsApp message on +234 813 129 5835. Payment can be made in cash at our centre or via bank transfer. Once your spot is confirmed, you'll receive full joining instructions by email and WhatsApp.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can organisations book group training for their staff?
+          <div class="faq-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#1a4ab5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </button>
+        <div class="faq-a">Absolutely. We offer corporate and group training packages tailored to your organisation's needs. Whether it's upskilling your team in Microsoft Office, cybersecurity awareness, or data management, we'll design a bespoke programme for you. Contact us directly to discuss group pricing and scheduling.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <h2>Ready to Start Learning?</h2>
+    <p>Book your session today and begin your journey to digital success!</p>
+    <a href="#booking" class="btn-started">Get Started</a>
+  </div>
+</section>
+
+<!-- RICH FOOTER -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <img class="f-logo" src="data:image/png;base64,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" alt="Bright Path Logo">
+      <p>Empowering individuals with in-demand digital skills and CBT training for a brighter, more successful future in Nigeria's digital economy.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/2348131295835" target="_blank" title="WhatsApp">💬</a>
+        <a href="mailto:itambright@gmail.com" title="Email">✉️</a>
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">ig</a>
+      </div>
+    </div>
+    <!-- Quick links -->
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#booking">Book Now</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <!-- Courses -->
+    <div class="footer-col">
+      <h5>Our Courses</h5>
+      <ul>
+        <li><a href="#booking">CBT Exam Practice</a></li>
+        <li><a href="#booking">Web Development</a></li>
+        <li><a href="#booking">Python Programming</a></li>
+        <li><a href="#booking">Cybersecurity</a></li>
+        <li><a href="#booking">Basic Computer Skills</a></li>
+        <li><a href="#booking">Graphics & Design</a></li>
+      </ul>
+    </div>
+    <!-- Contact -->
+    <div class="footer-col">
+      <h5>Contact Us</h5>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><polyline points="1,5.5 8,9.5 15,5.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        <a href="mailto:itambright@gmail.com">itambright@gmail.com</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2.5 2h3l1.5 3.5-2 1.2c.9 2 2.8 3.9 4.8 4.8L11 9.5l3.5 1.5V14c0 .8-.7 1.5-1.5 1.5C5 15.5.5 11 .5 5 .5 4.2 1.2 3.5 2 3.5h.5z" stroke="currentColor" stroke-width="1.3"/></svg>
+        <a href="https://wa.me/2348131295835">+234 813 129 5835</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M8 1C5 1 2 3.7 2 7c0 4.4 6 9 6 9s6-4.6 6-9c0-3.3-2.7-6-6-6z" stroke="currentColor" stroke-width="1.3"/></svg>
+        <span>Port Harcourt, Rivers State, Nigeria</span>
+      </div>
+      <div class="footer-contact-item" style="margin-top:4px;">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span>Mon–Sat: 8:00 AM – 6:00 PM</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 Bright Path Digital Skills &amp; CBT Centre. All rights reserved.</span>
+    <span>Built with ❤️ for Nigerian learners</span>
+  </div>
+</footer>
+
+
+<!-- Back to top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <svg viewBox="0 0 18 18" fill="none"><polyline points="4,11 9,6 14,11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<script>
+  /* ═══════════════════════════════════════
+     SLIDESHOW
+  ═══════════════════════════════════════ */
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('#heroSlideshow .slide');
+  const dots   = document.querySelectorAll('#heroDots .hero-dot');
+  let autoTimer = setInterval(() => moveSlide(1), 4200);
+
+  function showSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+  function moveSlide(dir) {
+    clearInterval(autoTimer);
+    showSlide(currentSlide + dir);
+    autoTimer = setInterval(() => moveSlide(1), 4200);
+  }
+  function goSlide(n) {
+    clearInterval(autoTimer);
+    showSlide(n);
+    autoTimer = setInterval(() => moveSlide(1), 4200);
+  }
+  let _tx = 0;
+  const _ss = document.getElementById('heroSlideshow');
+  _ss.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, {passive:true});
+  _ss.addEventListener('touchend',   e => {
+    const d = _tx - e.changedTouches[0].clientX;
+    if (Math.abs(d) > 40) moveSlide(d > 0 ? 1 : -1);
+  }, {passive:true});
+
+  /* ═══════════════════════════════════════
+     BOOKING FORM
+     ↓ Change this URL when you deploy your backend to a live server
+  ═══════════════════════════════════════ */
+  const API_URL = 'http://localhost:3000'; // Change to your deployed URL e.g. https://api.brightpath.com
+
+  function setFieldState(fieldId, errId, state, msg) {
+    const field = document.getElementById(fieldId);
+    const err   = document.getElementById(errId);
+    field.classList.remove('error','success');
+    if (state === 'error') { field.classList.add('error');   err.textContent = msg || ''; }
+    if (state === 'success') { field.classList.add('success'); err.textContent = ''; }
+    if (state === 'reset')  { err.textContent = ''; }
+  }
+
+  function validateForm() {
+    let valid = true;
+    const name    = document.getElementById('inp-name').value.trim();
+    const email   = document.getElementById('inp-email').value.trim();
+    const phone   = document.getElementById('inp-phone').value.trim();
+    const service = document.getElementById('inp-service').value;
+
+    if (!name || name.length < 2) {
+      setFieldState('field-name','err-name','error','Please enter your full name (min 2 characters)'); valid = false;
+    } else { setFieldState('field-name','err-name','success'); }
+
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRx.test(email)) {
+      setFieldState('field-email','err-email','error','Please enter a valid email address'); valid = false;
+    } else { setFieldState('field-email','err-email','success'); }
+
+    const phoneRx = /^[0-9+\-\s()]{7,20}$/;
+    if (!phone || !phoneRx.test(phone)) {
+      setFieldState('field-phone','err-phone','error','Please enter a valid phone number'); valid = false;
+    } else { setFieldState('field-phone','err-phone','success'); }
+
+    if (!service) {
+      setFieldState('field-service','err-service','error','Please select a service'); valid = false;
+    } else { setFieldState('field-service','err-service','success'); }
+
+    return valid;
+  }
+
+  function setLoading(on) {
+    const btn = document.getElementById('btnBookNow');
+    document.getElementById('btnText').style.display    = on ? 'none'         : 'inline';
+    document.getElementById('btnSpinner').style.display = on ? 'inline-flex'  : 'none';
+    btn.disabled = on;
+  }
+
+  function showBanner(msg) {
+    const b = document.getElementById('formErrorBanner');
+    b.innerHTML = '<svg viewBox="0 0 18 18" fill="none" width="18" height="18" style="flex-shrink:0"><circle cx="9" cy="9" r="8" stroke="#dc2626" stroke-width="1.5"/><line x1="9" y1="5" x2="9" y2="10" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1" fill="#dc2626"/></svg>' + msg;
+    b.style.display = 'flex';
+  }
+
+  function hideBanner() {
+    document.getElementById('formErrorBanner').style.display = 'none';
+  }
+
+  async function submitBooking() {
+    hideBanner();
+    if (!validateForm()) return;
+
+    const payload = {
+      fullName : document.getElementById('inp-name').value.trim(),
+      email    : document.getElementById('inp-email').value.trim(),
+      phone    : document.getElementById('inp-phone').value.trim(),
+      service  : document.getElementById('inp-service').value,
+    };
+
+    setLoading(true);
+    try {
+      const res  = await fetch(API_URL + '/api/book', {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Booking failed. Please try again.');
+      }
+
+      // Show success
+      document.getElementById('bookingForm').style.display    = 'none';
+      document.getElementById('bookingSuccess').style.display = 'block';
+      document.getElementById('bookingIdBadge').textContent   = '#' + data.bookingId;
+
+    } catch (err) {
+      if (err.name === 'TypeError') {
+        showBanner('Cannot connect to server. Please check your connection or try again shortly.');
+      } else {
+        showBanner(err.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function resetBookingForm() {
+    document.getElementById('bookingSuccess').style.display = 'none';
+    document.getElementById('bookingForm').style.display    = 'block';
+    ['inp-name','inp-email','inp-phone'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('inp-service').value = '';
+    ['field-name','field-email','field-phone','field-service'].forEach(id => {
+      document.getElementById(id).classList.remove('error','success');
+    });
+    ['err-name','err-email','err-phone','err-service'].forEach(id => {
+      document.getElementById(id).textContent = '';
+    });
+    hideBanner();
+  }
+
+  // Live validation on blur
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('inp-name').addEventListener('blur', () => {
+      const v = document.getElementById('inp-name').value.trim();
+      if (v.length > 0) setFieldState('field-name','err-name', v.length >= 2 ? 'success' : 'error', 'Min 2 characters');
+    });
+    document.getElementById('inp-email').addEventListener('blur', () => {
+      const v = document.getElementById('inp-email').value.trim();
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      if (v.length > 0) setFieldState('field-email','err-email', ok ? 'success' : 'error', 'Invalid email address');
+    });
+    document.getElementById('inp-phone').addEventListener('blur', () => {
+      const v = document.getElementById('inp-phone').value.trim();
+      const ok = /^[0-9+\-\s()]{7,20}$/.test(v);
+      if (v.length > 0) setFieldState('field-phone','err-phone', ok ? 'success' : 'error', 'Invalid phone number');
+    });
+    document.getElementById('inp-service').addEventListener('change', () => {
+      const v = document.getElementById('inp-service').value;
+      setFieldState('field-service','err-service', v ? 'success' : 'error', '');
+    });
+  });
+
+  // ── Booking form ────────────────────────────────────────────────────────
+  // Change this to your deployed backend URL when live
+  const API_URL = 'http://localhost:3000';
+
+  function showToast(msg, type) {
+    const t = document.getElementById('bookingToast');
+    t.className = 'booking-toast toast-' + type;
+    t.innerHTML = msg;
+    t.style.display = 'block';
+    t.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    if (type === 'success') setTimeout(() => { t.style.display='none'; }, 8000);
+  }
+
+  function setFieldState(id, state) {
+    const el = document.getElementById('field-' + id);
+    if (!el) return;
+    el.classList.remove('error','success');
+    if (state) el.classList.add(state);
+  }
+
+  function clientValidate() {
+    let ok = true;
+    const name    = document.getElementById('bp-name').value.trim();
+    const email   = document.getElementById('bp-email').value.trim();
+    const phone   = document.getElementById('bp-phone').value.trim();
+    const service = document.getElementById('bp-service').value;
+
+    setFieldState('name',    name.length >= 2    ? 'success' : 'error');
+    setFieldState('email',   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? 'success' : 'error');
+    setFieldState('phone',   /^[\d\s\+\-\(\)]{7,15}$/.test(phone)     ? 'success' : 'error');
+    setFieldState('service', service ? 'success' : 'error');
+
+    if (name.length < 2)                            ok = false;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) ok = false;
+    if (!/^[\d\s\+\-\(\)]{7,15}$/.test(phone))     ok = false;
+    if (!service)                                   ok = false;
+    return ok;
+  }
+
+  async function submitBooking() {
+    if (!clientValidate()) {
+      showToast('⚠️ Please fix the highlighted fields before submitting.', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('btnBookNow');
+    document.getElementById('btnText').style.display    = 'none';
+    document.getElementById('btnSpinner').style.display = 'inline';
+    btn.disabled = true;
+
+    const payload = {
+      name:    document.getElementById('bp-name').value.trim(),
+      email:   document.getElementById('bp-email').value.trim(),
+      phone:   document.getElementById('bp-phone').value.trim(),
+      service: document.getElementById('bp-service').value,
+      message: document.getElementById('bp-message').value.trim(),
+    };
+
+    try {
+      const res  = await fetch(API_URL + '/api/book', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        showToast('🎉 ' + data.message + '<br><small style="opacity:.8">Booking ref: ' + data.bookingId.slice(0,8).toUpperCase() + '</small>', 'success');
+        // Reset form
+        ['bp-name','bp-email','bp-phone','bp-message'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('bp-service').selectedIndex = 0;
+        ['name','email','phone','service','message'].forEach(id => setFieldState(id, ''));
+      } else {
+        const msg = data.errors ? data.errors.join('<br>') : (data.message || 'Something went wrong.');
+        showToast('❌ ' + msg, 'error');
+      }
+    } catch (err) {
+      showToast('❌ Could not reach the server. Please try again or contact us via WhatsApp.', 'error');
+      console.error('Booking error:', err);
+    } finally {
+      document.getElementById('btnText').style.display    = 'inline';
+      document.getElementById('btnSpinner').style.display = 'none';
+      btn.disabled = false;
+    }
+  }
+
+  // Live field validation on blur
+  ['bp-name','bp-email','bp-phone','bp-service'].forEach(id => {
+    document.getElementById(id)?.addEventListener('blur', clientValidate);
+  });
+
+
+  // ── Mobile nav ──────────────────────────────────────────────
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    const ham = document.getElementById('hamburger');
+    nav.classList.toggle('open');
+    ham.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── Back to top ─────────────────────────────────────────────
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('show', window.scrollY > 400);
+    updateActiveNav();
+  });
+
+  // ── Active nav highlight on scroll ──────────────────────────
+  const navSections = ['about','services','courses','booking','contact','testimonials'];
+  function updateActiveNav() {
+    let current = '';
+    navSections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('nav-active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  // ── Scroll reveal (IntersectionObserver) ────────────────────
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  // ── Animated stat counters ───────────────────────────────────
+  function animateCount(el, target, suffix) {
+    let start = 0;
+    const dur = 1800;
+    const step = 16;
+    const inc  = target / (dur / step);
+    const timer = setInterval(() => {
+      start += inc;
+      if (start >= target) { el.textContent = target + (suffix||''); clearInterval(timer); }
+      else el.textContent = Math.floor(start) + (suffix||'');
+    }, step);
+  }
+  const statObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el     = entry.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = el.textContent.includes('%') || el.dataset.target === '98' ? '%' :
+                       el.dataset.target === '500' ? '+' :
+                       el.dataset.target === '20'  ? '+' : '+';
+        animateCount(el, target, suffix);
+        statObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.s-num[data-target]').forEach(el => statObs.observe(el));
+
+
+  // ── FAQ accordion ──────────────────────────────────────────────────────────
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── Active nav on scroll ───────────────────────────────────────────────────
+  const navSections = ['services','courses','pricing','about','contact','booking'];
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  function updateActiveNav() {
+    const scrollY = window.scrollY + 100;
+    let current = '';
+    navSections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY) current = id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('nav-active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('nav-active');
+    });
+  }
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+
+</script>
+</body>
+</html>
